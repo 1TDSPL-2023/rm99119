@@ -10,14 +10,43 @@ function insereNumero(botao,visor) {
 }
 
 //TRANSFORME A FUNÇÃO EM UMA FUNÇÃO QUE RECEBA TODAS AS OPERAÇÕES
+
 function resultado(visor) {
     const meuVisor = document.getElementById(visor);
-    let novoVisorSemSimbolos = meuVisor.value.split("+");
+    const expressao = meuVisor.value;
+    
+    let operador;
+    if (expressao.includes("+")) {
+        operador = "+";
+    } else if (expressao.includes("-")) {
+        operador = "-";
+    } else if (expressao.includes("*")) {
+        operador = "*";
+    } else if (expressao.includes("/")) {
+        operador = "/";
+    }
+    
+    const novoVisorSemSimbolos = expressao.split(operador);
  
-    let total = 0;
+    let total = parseInt(novoVisorSemSimbolos[0]);
  
-    novoVisorSemSimbolos.forEach((nr)=>{
-        total +=  parseInt(nr);
-    });
+    for (let i = 1; i < novoVisorSemSimbolos.length; i++) {
+        const numero = parseInt(novoVisorSemSimbolos[i]);
+        switch (operador) {
+            case "+":
+                total += numero;
+                break;
+            case "-":
+                total -= numero;
+                break;
+            case "*":
+                total *= numero;
+                break;
+            case "/":
+                total /= numero;
+                break;
+        }
+    }
+ 
     console.log(total);
 }
