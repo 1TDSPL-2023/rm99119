@@ -1,52 +1,24 @@
+function insereNumero(botao, visor){
+    if(botao.value == "+" || botao.value == "-" || botao.value == "*" || botao.value == "/"){
 
+        if(visor.value[visor.length -1] == "+"|| visor.value[visor.length -1] == "-"||visor.value[visor.length -1] == "*"||visor.value[visor.length -1] == "/"){
+            visor.value.slice(visor.value.length -1)
+        }else{
+            visor.value += botao.value
+        }
 
-function insereNumero(botao,visor) {
-
-    const meuBotao = document.getElementById(botao);
-    const meuVisor = document.getElementById(visor);
-
-    meuVisor.value += meuBotao.value;
-
+    }else{
+        visor.value += botao.value;
+    }
 }
 
-//TRANSFORME A FUNÇÃO EM UMA FUNÇÃO QUE RECEBA TODAS AS OPERAÇÕES
+function resultado(visor){
 
-function resultado(visor) {
-    const meuVisor = document.getElementById(visor);
-    const expressao = meuVisor.value;
-    
-    let operador;
-    if (expressao.includes("+")) {
-        operador = "+";
-    } else if (expressao.includes("-")) {
-        operador = "-";
-    } else if (expressao.includes("*")) {
-        operador = "*";
-    } else if (expressao.includes("/")) {
-        operador = "/";
-    }
-    
-    const novoVisorSemSimbolos = expressao.split(operador);
- 
-    let total = parseInt(novoVisorSemSimbolos[0]);
- 
-    for (let i = 1; i < novoVisorSemSimbolos.length; i++) {
-        const numero = parseInt(novoVisorSemSimbolos[i]);
-        switch (operador) {
-            case "+":
-                total += numero;
-                break;
-            case "-":
-                total -= numero;
-                break;
-            case "*":
-                total *= numero;
-                break;
-            case "/":
-                total /= numero;
-                break;
+    try {
+        visor.value = eval(visor.value);
+    } catch (error) {
+        if(visor.value[visor.length -1] == "+" ||visor.value[visor.length-1] == "-" || visor.value[visor.length-1] == "*" || visor.value[visor.length-1] == "/"){
+            visor.value.slice(visor.value.length -1)
         }
     }
- 
-    console.log(total);
 }
